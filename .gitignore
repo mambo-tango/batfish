@@ -1,0 +1,13 @@
+.DS_Store
+.project
+.classpath
+.settings/
+target/
+build/
+tags
+logs/
+assembly/
+conf/
+*.log
+webRoot/
+jetty.pid
