@@ -19,19 +19,19 @@ public class MQConfig {
     @Autowired
     Environment environment;
 
-    @Bean
-    public DefaultMQPushConsumer pushConsumer() {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(environment.getProperty("rocketmq.consumer.groupName"));
-        consumer.setNamesrvAddr(environment.getProperty("rocketmq.consumer.nameServer"));
-        BatfishMessageListener msgListener = new BatfishMessageListener();
-        consumer.registerMessageListener(msgListener);
-        try {
-            consumer.subscribe(environment.getProperty("rocketmq.consumer.topic"), environment.getProperty("rocketmq.consumer.tag"));
-            consumer.setConsumeTimeout(Integer.valueOf(environment.getProperty("rocketmq.consumer.timeout")));
-            consumer.start();
-        } catch (MQClientException e) {
-            e.printStackTrace();
-        }
-        return consumer;
-    }
+//    @Bean
+//    public DefaultMQPushConsumer pushConsumer() {
+//        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(environment.getProperty("rocketmq.consumer.groupName"));
+//        consumer.setNamesrvAddr(environment.getProperty("rocketmq.consumer.nameServer"));
+//        BatfishMessageListener msgListener = new BatfishMessageListener();
+//        consumer.registerMessageListener(msgListener);
+//        try {
+//            consumer.subscribe(environment.getProperty("rocketmq.consumer.topic"), environment.getProperty("rocketmq.consumer.tag"));
+//            consumer.setConsumeTimeout(Integer.valueOf(environment.getProperty("rocketmq.consumer.timeout")));
+//            consumer.start();
+//        } catch (MQClientException e) {
+//            e.printStackTrace();
+//        }
+//        return consumer;
+//    }
 }
