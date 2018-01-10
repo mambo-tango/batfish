@@ -11,20 +11,22 @@ import org.batfish.core.service.AnalysisTechnologyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 
 /**
 * @author Tango
 * @date 2018年1月9日 下午3:10:28
 * @since 
 */
-public class BatfishMessageListener implements MessageListenerConcurrently {
+@Deprecated
+public class BatfishMessageListener implements ApplicationListener<ContextRefreshedEvent> {
     
     Logger LOG = LoggerFactory.getLogger(BatfishMessageListener.class);
     
     @Autowired
     AnalysisTechnologyService analysisService;
 
-    @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
         // msgs 消息list
         for (MessageExt msg : msgs) {
@@ -44,6 +46,11 @@ public class BatfishMessageListener implements MessageListenerConcurrently {
             }
         }
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS; //成功返回 
+    }
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        consumeMessage(null, null);
     }
 
 

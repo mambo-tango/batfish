@@ -12,16 +12,22 @@ import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.batfish.core.service.AnalysisTechnologyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
-@Deprecated
+@Component
 public class Consumer implements ApplicationListener<ContextRefreshedEvent>{
 
     @Autowired
     DefaultMQPushConsumer consumer;
+    
+    @Autowired
+    AnalysisTechnologyService analysisService;
     
     public void consumer() {
         consumer.registerMessageListener(new MessageListenerConcurrently() {
@@ -38,15 +44,20 @@ public class Consumer implements ApplicationListener<ContextRefreshedEvent>{
                     try {
                         // 读取消息 （编码规定为UTF-8）
                         String m = new String(msg.getBody(), "UTF-8"); //json字符串
-                        // msg.getReconsumeTimes() 获取重新消费次数，大于15后建设另做处理并返回 ConsumeConcurrentlyStatus.CONSUME_SUCCESS
-                        // do something
-                        System.out.println("message:"+m);
+                        String result = analysisService.analysisTechnology(msg.getKeys(), m);
+                        System.out.println("result=======================> " + result);
                     } catch (final UnsupportedEncodingException e) {
+                        return ConsumeConcurrentlyStatus.RECONSUME_LATER;
                     }
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS; //成功返回 
             }
         });
+        try {
+            consumer.start();
+        } catch (MQClientException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
