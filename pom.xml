@@ -11,6 +11,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-boot.version>1.5.8.RELEASE</spring-boot.version>
 		<spring-cloud.version>Dalston.RELEASE</spring-cloud.version>
+		<redis-version>1.3.2.RELEASE</redis-version>
 	</properties>
 
 	<modules>
@@ -20,4 +21,14 @@
 		<module>batfish-es</module>
 		<module>batfish-analysis</module>
 	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-redis</artifactId>
+				<version>${redis-version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
