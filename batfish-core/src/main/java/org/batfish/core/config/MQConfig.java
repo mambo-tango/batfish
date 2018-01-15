@@ -42,6 +42,7 @@ public class MQConfig {
         try {
             consumer.subscribe(environment.getProperty("rocketmq.consumer.topic"), environment.getProperty("rocketmq.consumer.tag"));
             consumer.setConsumeTimeout(Integer.valueOf(environment.getProperty("rocketmq.consumer.timeout")));
+            consumer.setPullBatchSize(10);
             
 //            consumer.registerMessageListener(new MessageListenerConcurrently() {
 //                

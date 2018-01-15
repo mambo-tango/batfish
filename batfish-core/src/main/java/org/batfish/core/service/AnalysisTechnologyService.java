@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value="analysis-service")
 public interface AnalysisTechnologyService {
     
-    @RequestMapping(value="/analysis", method=RequestMethod.POST)
+    @RequestMapping(value="v1/analysis", method=RequestMethod.POST)
     String analysisTechnology(@RequestParam(value="url") String url, @RequestParam(value="detail") String detail);
            
 }

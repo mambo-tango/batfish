@@ -28,7 +28,7 @@ public class RedisConfig {
     @Autowired
     Environment environment;
     
-    @Value("${batfish.analysis.redis.host}")
+    @Value("${batfish.analysis.redis.shardeds}")
     String redisHostAndPort;
     
     @Bean(name = "testShardedJedis")
@@ -37,6 +37,7 @@ public class RedisConfig {
             List<JedisShardInfo> shardList = new ArrayList<>();
 //            String shardedsStr = environment.getProperty("spring.redis.shards.test");
             String shardedsStr = redisHostAndPort;
+            System.out.println("redisHostAndPort==================>"+ redisHostAndPort);
             if (shardedsStr != null) {
                 for(String hostAndPorts: shardedsStr.split(SPLIT_VALUE_F)) {
                     String[] hostAndPort = hostAndPorts.split(SPLIT_VALUE_M);

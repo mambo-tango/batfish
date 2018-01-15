@@ -37,7 +37,7 @@ public class Consumer implements ApplicationListener<ContextRefreshedEvent>{
                 // msgs 消息list
                 for (MessageExt msg : msgs) {
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e1) {
                         e1.printStackTrace();
                     }

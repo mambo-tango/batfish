@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 */
 
 @RestController
-//@RequestMapping(value="/analysis")
+@RequestMapping(value="/v1")
 public class AnalysisController {
     
     Logger LOG = LoggerFactory.getLogger(AnalysisController.class);

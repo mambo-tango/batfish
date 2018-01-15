@@ -16,21 +16,20 @@ import redis.clients.jedis.ShardedJedis;
 @Component
 public class AnalysisServiceImpl implements AnalysisService{
     
-    public static String KEY = "ANALYSIS_KEY";
-    
     @Autowired
     @Qualifier("testShardedJedis")
     ShardedJedis redis;
     
-    @Value("batfish.analysis.type.array")
-    public static String[] TYPE_ARRAY;
+    @Value("${batfish.analysis.type.array}")
+    String typeArray;
 
     @Override
     public String saveAnalysisToRedis(String msg) {
         Long result = 0L;
-        for(String type: TYPE_ARRAY) {
+        for(String type: typeArray.split(",")) {
             if(msg.contains(type)) {
                 result = result + redis.incr(type);
+                System.out.println(">>>>>>>>>>>>自增1<<<<<<<<<<<"+ type);
             }
         }
         return String.valueOf(result);
