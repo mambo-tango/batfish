@@ -7,9 +7,7 @@
     <artifactId>batfish</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.tango</groupId>
   <artifactId>batfish-common</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>batfish-common</name>
   <url>http://maven.apache.org</url>
   <properties>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -27,11 +28,15 @@ public class RedisConfig {
     @Autowired
     Environment environment;
     
+    @Value("${batfish.analysis.redis.host}")
+    String redisHostAndPort;
+    
     @Bean(name = "testShardedJedis")
     public ShardedJedis getTestShardedJedis() {
         try {
             List<JedisShardInfo> shardList = new ArrayList<>();
-            String shardedsStr = environment.getProperty("spring.redis.shards.test");
+//            String shardedsStr = environment.getProperty("spring.redis.shards.test");
+            String shardedsStr = redisHostAndPort;
             if (shardedsStr != null) {
                 for(String hostAndPorts: shardedsStr.split(SPLIT_VALUE_F)) {
                     String[] hostAndPort = hostAndPorts.split(SPLIT_VALUE_M);
