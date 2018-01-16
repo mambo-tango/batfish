@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tango</groupId>
 	<artifactId>batfish</artifactId>
@@ -11,6 +12,10 @@
 		<spring-boot.version>1.5.8.RELEASE</spring-boot.version>
 		<spring-cloud.version>Dalston.RELEASE</spring-cloud.version>
 		<redis-version>1.3.2.RELEASE</redis-version>
+		<rocketmq.version>4.1.0-incubating</rocketmq.version>
+		<webmagic.version>0.7.3</webmagic.version>
+		<webmagic-extension.version>0.7.3</webmagic-extension.version>
+		<spring-cloud-config.version>1.2.3.RELEASE</spring-cloud-config.version>
 	</properties>
 
 	<modules>
@@ -19,9 +24,9 @@
 		<module>batfish-core</module>
 		<module>batfish-es</module>
 		<module>batfish-analysis</module>
-    <module>batfish-configcenter</module>
-    <module>batfish-eureka-server</module>
-  </modules>
+		<module>batfish-configcenter</module>
+		<module>batfish-eureka-server</module>
+	</modules>
 
 	<dependencyManagement>
 		<dependencies>

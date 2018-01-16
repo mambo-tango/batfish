@@ -5,21 +5,11 @@ package org.batfish.core.config;
 * @since 
 */
 
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
-import org.apache.rocketmq.client.impl.consumer.ConsumeMessageConcurrentlyService;
-import org.apache.rocketmq.common.message.MessageExt;
-import org.batfish.core.mqConsumer.ConsumerEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -32,8 +22,6 @@ public class MQConfig {
     @Autowired
     Environment environment;
     
-    @Autowired
-    private ApplicationEventPublisher publisher;
 
     @Bean
     public DefaultMQPushConsumer pushConsumer() {
