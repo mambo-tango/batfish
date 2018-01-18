@@ -1,6 +1,6 @@
 package org.batfish.es.service.impl;
 
-import org.batfish.common.domain.JobDetail;
+import org.batfish.es.domain.JobDetail;
 import org.batfish.es.repository.JobDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,7 @@ public class JobDetailService implements org.batfish.es.service.JobDetailService
     @Override
     public String saveJobDetail(JobDetail jobDetail) {
         // TODO Auto-generated method stub
+        
         return jobDetailRepository.save(jobDetail).getUrl();
     }
 

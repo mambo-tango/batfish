@@ -2,7 +2,7 @@ package org.batfish.es.controller;
 
 import java.util.UUID;
 
-import org.batfish.common.domain.JobDetail;
+import org.batfish.es.domain.JobDetail;
 import org.batfish.es.service.JobDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +24,12 @@ public class JobDetailController {
     
     @RequestMapping(value="save", method=RequestMethod.POST)
     String saveJobDetail(@RequestParam("url") String url, @RequestParam("detail") String detail) {
-        JobDetail jd = new JobDetail();
-        jd.setId(UUID.randomUUID().toString());
-        jd.setUrl(url);
-        jd.setDetail(detail);
         
-        return jobDetailService.saveJobDetail(jd);
+        JobDetail jobDetail = new JobDetail();
+        jobDetail.setId(UUID.randomUUID().toString());
+        jobDetail.setUrl(url);
+        jobDetail.setDetail(detail);
+        return jobDetailService.saveJobDetail(jobDetail);
     }
 
 }

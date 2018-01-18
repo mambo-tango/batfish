@@ -1,11 +1,22 @@
-package org.batfish.common.domain;
+package org.batfish.es.domain;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.data.elasticsearch.annotations.Document;
+
 /**
 * @author Tango
 * @date 2018年1月17日 下午8:44:52
 * @since 
 */
-public class JobDetail {
+@Document(indexName = "jobindex", type = "jobype")
+public class JobDetail implements Serializable{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /**
      * ID
      */
@@ -22,6 +33,11 @@ public class JobDetail {
      * 需求
      */
     private String detail;
+    
+    /**
+     * 创建时间
+     */
+    private Date createTime;
     
     public String getId() {
         return id;
@@ -46,6 +62,12 @@ public class JobDetail {
     }
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+    public Date getCreateTime() {
+        return createTime;
+    }
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
     
     

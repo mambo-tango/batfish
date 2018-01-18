@@ -15,6 +15,9 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.batfish.core.service.AnalysisTechnologyService;
+import org.batfish.core.service.ESService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -22,12 +25,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Consumer implements ApplicationListener<ContextRefreshedEvent>{
+    
+    Logger LOG = LoggerFactory.getLogger(Consumer.class);
 
     @Autowired
     DefaultMQPushConsumer consumer;
     
     @Autowired
     AnalysisTechnologyService analysisService;
+    
+    @Autowired
+    ESService esService;
     
     public void consumer() {
         consumer.registerMessageListener(new MessageListenerConcurrently() {
@@ -44,8 +52,9 @@ public class Consumer implements ApplicationListener<ContextRefreshedEvent>{
                     try {
                         // 读取消息 （编码规定为UTF-8）
                         String m = new String(msg.getBody(), "UTF-8"); //json字符串
-                        String result = analysisService.analysisTechnology(msg.getKeys(), m);
-                        System.out.println("result=======================> " + result);
+                        String resultANA = analysisService.analysisTechnology(msg.getKeys(), m);
+                        String resultES = esService.saveToES(msg.getKeys(), m);
+                        LOG.info(">>>>>>>>> resultANA=> " + resultANA +" reultES=>" + resultES + " <<<<<<<<<<<<<<");
                     } catch (final UnsupportedEncodingException e) {
                         return ConsumeConcurrentlyStatus.RECONSUME_LATER;
                     }

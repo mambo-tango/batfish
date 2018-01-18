@@ -1,6 +1,6 @@
 package org.batfish.es.service;
 
-import org.batfish.common.domain.JobDetail;
+import org.batfish.es.domain.JobDetail;
 
 /**
 * @author Tango
